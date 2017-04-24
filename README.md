@@ -1,4 +1,4 @@
-# JMS Serializer Strict JSON
+# JMS Serializer Strict JSON [![Build Status](https://travis-ci.org/JustBlackBird/jms-serializer-strict-json.svg)](https://travis-ci.org/JustBlackBird/jms-serializer-strict-json)
 
 > Deserialize JSON using strict types validation
 
