@@ -1,0 +1,35 @@
+{
+    "name": "justblackbird/jms-serializer-strict-json",
+    "type": "library",
+    "description": "Provide strict JSON deserialization",
+    "version": "0.1.0",
+    "keywords": [
+        "jms",
+        "serializer",
+        "json"
+    ],
+    "homepage": "https://github.com/JustBlackBird/jms-serializer-strict-json",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "Dmitriy Simushev",
+            "email": "simushevds@gmail.com"
+        }
+    ],
+    "require": {
+        "jms/serializer": "~1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "JustBlackBird\\JmsSerializer\\StrictJson\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JustBlackBird\\JmsSerializer\\StrictJson\\Tests\\": "tests"
+        }
+    }
+}
