@@ -8,7 +8,4 @@ before_script:
   - composer update
 
 script:
-  - composer run build
-
-after_script:
-  - composer run coveralls
+  - composer run test
