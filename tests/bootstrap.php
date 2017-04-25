@@ -17,7 +17,7 @@
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
-call_user_func(function() {
+call_user_func(function () {
     $autoload_file = __DIR__.'/../vendor/autoload.php';
 
     require $autoload_file;
