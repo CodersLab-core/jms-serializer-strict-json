@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "JustBlackBird\\JmsSerializer\\StrictJson\\": "src"
+            "JustBlackBird\\JmsSerializerStrictJson\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "JustBlackBird\\JmsSerializer\\StrictJson\\Tests\\": "tests"
+            "JustBlackBird\\JmsSerializerStrictJson\\Tests\\": "tests"
         }
     }
 }

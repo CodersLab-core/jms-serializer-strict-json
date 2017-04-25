@@ -28,7 +28,7 @@ You shold change it to something like:
 use JMS\Serializer\Naming\CamelCaseNamingStrategy;
 use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
 use JMS\Serializer\SerializerBuilder;
-use JustBlackBird\JmsSerializer\StrictJson\StrictJsonDeserializationVisitor;
+use JustBlackBird\JmsSerializerStrictJson\StrictJsonDeserializationVisitor;
 
 $naming_strategy = new SerializedNameAnnotationStrategy(new CamelCaseNamingStrategy());
 $serializer = SerializerBuilder::create()

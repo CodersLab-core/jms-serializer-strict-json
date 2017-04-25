@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-namespace JustBlackBird\JmsSerializer\StrictJson;
+namespace JustBlackBird\JmsSerializerStrictJson;
 
 use JMS\Serializer\Context;
 use JMS\Serializer\Exception\RuntimeException;

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-namespace JustBlackBird\JmsSerializer\StrictJson\Tests;
+namespace JustBlackBird\JmsSerializerStrictJson\Tests;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use JMS\Serializer\Construction\UnserializeObjectConstructor;
@@ -29,7 +29,7 @@ use JMS\Serializer\Metadata\Driver\AnnotationDriver;
 use JMS\Serializer\Naming\CamelCaseNamingStrategy;
 use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
 use JMS\Serializer\Serializer;
-use JustBlackBird\JmsSerializer\StrictJson\StrictJsonDeserializationVisitor;
+use JustBlackBird\JmsSerializerStrictJson\StrictJsonDeserializationVisitor;
 use Metadata\MetadataFactory;
 use PHPUnit\Framework\TestCase;
 use PhpCollection\Map;
