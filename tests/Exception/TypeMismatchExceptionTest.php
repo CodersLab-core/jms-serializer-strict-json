@@ -23,7 +23,7 @@ use PHPUnit\Framework\TestCase;
 
 class TypeMismatchExceptionTest extends TestCase
 {
-    public function testStaticConstructor()
+    public function testStaticConstructorWithoutContext()
     {
         $expected_type = 'foo';
         $actual_value = 'bar';
@@ -34,12 +34,30 @@ class TypeMismatchExceptionTest extends TestCase
         $this->assertSame('Expected foo, but got string: "bar"', $exception->getMessage());
     }
 
-    public function testStaticConstructorWithContext()
+    public function testStaticConstructorWithTopLevelContext()
     {
         $expected_type = 'foo';
         $actual_value = 'bar';
         $context = $this->getContextMock();
-        $context->expects($this->once())
+        $context->expects($this->atLeastOnce())
+            ->method('getCurrentPath')
+            ->willReturn([]);
+
+        $exception = TypeMismatchException::fromValue($expected_type, $actual_value, $context);
+
+        $this->assertInstanceOf(TypeMismatchException::class, $exception);
+        $this->assertSame(
+            'Expected foo, but got string: "bar"',
+            $exception->getMessage()
+        );
+    }
+
+    public function testStaticConstructorWithThirdLevelContext()
+    {
+        $expected_type = 'foo';
+        $actual_value = 'bar';
+        $context = $this->getContextMock();
+        $context->expects($this->atLeastOnce())
             ->method('getCurrentPath')
             ->willReturn(['asd', 'qwe']);
 
