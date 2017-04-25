@@ -29,7 +29,7 @@ class StrictJsonDeserializationVisitor extends JsonDeserializationVisitor
     public function visitString($data, array $type, Context $context)
     {
         if (!is_string($data)) {
-            throw TypeMismatchException::fromValue('string', $data);
+            throw TypeMismatchException::fromValue('string', $data, $context);
         }
 
         return parent::visitString($data, $type, $context);
@@ -41,7 +41,7 @@ class StrictJsonDeserializationVisitor extends JsonDeserializationVisitor
     public function visitBoolean($data, array $type, Context $context)
     {
         if (!is_bool($data)) {
-            throw TypeMismatchException::fromValue('boolean', $data);
+            throw TypeMismatchException::fromValue('boolean', $data, $context);
         }
 
         return parent::visitBoolean($data, $type, $context);
@@ -53,7 +53,7 @@ class StrictJsonDeserializationVisitor extends JsonDeserializationVisitor
     public function visitInteger($data, array $type, Context $context)
     {
         if (!is_int($data)) {
-            throw TypeMismatchException::fromValue('integer', $data);
+            throw TypeMismatchException::fromValue('integer', $data, $context);
         }
 
         return parent::visitInteger($data, $type, $context);
@@ -65,7 +65,7 @@ class StrictJsonDeserializationVisitor extends JsonDeserializationVisitor
     public function visitDouble($data, array $type, Context $context)
     {
         if (!is_float($data) && !is_integer($data)) {
-            throw TypeMismatchException::fromValue('double', $data);
+            throw TypeMismatchException::fromValue('double', $data, $context);
         }
 
         return parent::visitDouble($data, $type, $context);

@@ -19,7 +19,7 @@ namespace JustBlackBird\JmsSerializerStrictJson\Tests;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use JMS\Serializer\Construction\UnserializeObjectConstructor;
-use JMS\Serializer\Context;
+use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\EventDispatcher\EventDispatcher;
 use JMS\Serializer\Handler\ArrayCollectionHandler;
 use JMS\Serializer\Handler\HandlerRegistry;
@@ -30,6 +30,7 @@ use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
 use JMS\Serializer\Serializer;
 use JustBlackBird\JmsSerializerStrictJson\Exception\TypeMismatchException;
 use JustBlackBird\JmsSerializerStrictJson\StrictJsonDeserializationVisitor;
+use JustBlackBird\JmsSerializerStrictJson\Tests\Fixtures\User;
 use Metadata\MetadataFactory;
 use PHPUnit\Framework\TestCase;
 use PhpCollection\Map;
@@ -231,9 +232,20 @@ class DeserializationTest extends TestCase
         ];
     }
 
-    private function deserialize($content, $type, Context $context = null)
+    public function testExceptionMesageForInvalidScalar()
     {
-        return $this->serializer->deserialize($content, $type, 'json', $context);
+        $this->expectException(TypeMismatchException::class);
+        $this->expectExceptionMessage('Expected integer, but got string: "foo"');
+
+        $this->deserialize('"foo"', 'integer');
+    }
+
+    public function testExceptionMessageForObjectProperty()
+    {
+        $this->expectException(TypeMismatchException::class);
+        $this->expectExceptionMessage('Expected property "id" to be integer, but got string: "foo"');
+
+        $this->deserialize('{"id":"foo"}', User::class);
     }
 
     protected function setUp()
@@ -257,5 +269,10 @@ class DeserializationTest extends TestCase
             $deserialization_visitors,
             new EventDispatcher()
         );
+    }
+
+    private function deserialize($content, $type, DeserializationContext $context = null)
+    {
+        return $this->serializer->deserialize($content, $type, 'json', $context);
     }
 }
