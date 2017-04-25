@@ -17,6 +17,7 @@
 
 namespace JustBlackBird\JmsSerializerStrictJson\Exception;
 
+use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\Exception\RuntimeException;
 
 class TypeMismatchException extends RuntimeException
@@ -26,12 +27,23 @@ class TypeMismatchException extends RuntimeException
      *
      * @param string $expected_type
      * @param mixed $actual_value
+     * @param DeserializationContext|null $context
      * @return TypeMismatchException
      */
-    public static function fromValue($expected_type, $actual_value)
-    {
+    public static function fromValue(
+        $expected_type,
+        $actual_value,
+        DeserializationContext $context = null
+    ) {
+        if ($context) {
+            $property = sprintf('property "%s" to be ', implode('.', $context->getCurrentPath()));
+        } else {
+            $property = '';
+        }
+
         return new static(sprintf(
-            'Expected %s, but got %s: %s',
+            'Expected %s%s, but got %s: %s',
+            $property,
             $expected_type,
             gettype($actual_value),
             json_encode($actual_value)

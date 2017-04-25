@@ -17,6 +17,7 @@
 
 namespace JustBlackBird\JmsSerializerStrictJson\Tests\Exception;
 
+use JMS\Serializer\DeserializationContext;
 use JustBlackBird\JmsSerializerStrictJson\Exception\TypeMismatchException;
 use PHPUnit\Framework\TestCase;
 
@@ -31,5 +32,30 @@ class TypeMismatchExceptionTest extends TestCase
 
         $this->assertInstanceOf(TypeMismatchException::class, $exception);
         $this->assertSame('Expected foo, but got string: "bar"', $exception->getMessage());
+    }
+
+    public function testStaticConstructorWithContext()
+    {
+        $expected_type = 'foo';
+        $actual_value = 'bar';
+        $context = $this->getContextMock();
+        $context->expects($this->once())
+            ->method('getCurrentPath')
+            ->willReturn(['asd', 'qwe']);
+
+        $exception = TypeMismatchException::fromValue($expected_type, $actual_value, $context);
+
+        $this->assertInstanceOf(TypeMismatchException::class, $exception);
+        $this->assertSame(
+            'Expected property "asd.qwe" to be foo, but got string: "bar"',
+            $exception->getMessage()
+        );
+    }
+
+    private function getContextMock()
+    {
+        return $this->getMockBuilder(DeserializationContext::class)
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }
