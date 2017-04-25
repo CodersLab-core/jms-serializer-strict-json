@@ -12,7 +12,7 @@ composer require justblackbird/jms-serializer-strict-json
 
 ## Usage
 
-Use the `StrictJsonDeserializationVisition` from the package instead of JMSSerializer built in `JsonDeserializationVisitior`.
+Use the `StrictJsonDeserializationVisitor` from the package instead of JMSSerializer built in `JsonDeserializationVisitor`.
 
 For example, if you use the following code to instantiate JMS serializer:
 
@@ -22,7 +22,7 @@ use JMS\Serializer\SerializerBuilder;
 $serializer = SerializerBuilder::create()->build();
 ```
 
-You shold change it to something like:
+You should change it to something like:
 
 ```php
 use JMS\Serializer\Naming\CamelCaseNamingStrategy;
