@@ -18,8 +18,8 @@
 namespace JustBlackBird\JmsSerializerStrictJson;
 
 use JMS\Serializer\Context;
-use JMS\Serializer\Exception\RuntimeException;
 use JMS\Serializer\JsonDeserializationVisitor;
+use JustBlackBird\JmsSerializerStrictJson\Exception\TypeMismatchException;
 
 class StrictJsonDeserializationVisitor extends JsonDeserializationVisitor
 {
@@ -29,11 +29,7 @@ class StrictJsonDeserializationVisitor extends JsonDeserializationVisitor
     public function visitString($data, array $type, Context $context)
     {
         if (!is_string($data)) {
-            throw new RuntimeException(sprintf(
-                'Expected string, but got %s: %s',
-                gettype($data),
-                json_encode($data)
-            ));
+            throw TypeMismatchException::fromValue('string', $data);
         }
 
         return parent::visitString($data, $type, $context);
@@ -45,11 +41,7 @@ class StrictJsonDeserializationVisitor extends JsonDeserializationVisitor
     public function visitBoolean($data, array $type, Context $context)
     {
         if (!is_bool($data)) {
-            throw new RuntimeException(sprintf(
-                'Expected boolean, but got %s: %s',
-                gettype($data),
-                json_encode($data)
-            ));
+            throw TypeMismatchException::fromValue('boolean', $data);
         }
 
         return parent::visitBoolean($data, $type, $context);
@@ -61,11 +53,7 @@ class StrictJsonDeserializationVisitor extends JsonDeserializationVisitor
     public function visitInteger($data, array $type, Context $context)
     {
         if (!is_int($data)) {
-            throw new RuntimeException(sprintf(
-                'Expected integer, but got %s: %s',
-                gettype($data),
-                json_encode($data)
-            ));
+            throw TypeMismatchException::fromValue('integer', $data);
         }
 
         return parent::visitInteger($data, $type, $context);
@@ -77,11 +65,7 @@ class StrictJsonDeserializationVisitor extends JsonDeserializationVisitor
     public function visitDouble($data, array $type, Context $context)
     {
         if (!is_float($data) && !is_integer($data)) {
-            throw new RuntimeException(sprintf(
-                'Expected float, but got %s: %s',
-                gettype($data),
-                json_encode($data)
-            ));
+            throw TypeMismatchException::fromValue('double', $data);
         }
 
         return parent::visitDouble($data, $type, $context);

@@ -21,7 +21,6 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use JMS\Serializer\Construction\UnserializeObjectConstructor;
 use JMS\Serializer\Context;
 use JMS\Serializer\EventDispatcher\EventDispatcher;
-use JMS\Serializer\Exception\RuntimeException;
 use JMS\Serializer\Handler\ArrayCollectionHandler;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\Handler\PhpCollectionHandler;
@@ -29,6 +28,7 @@ use JMS\Serializer\Metadata\Driver\AnnotationDriver;
 use JMS\Serializer\Naming\CamelCaseNamingStrategy;
 use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
 use JMS\Serializer\Serializer;
+use JustBlackBird\JmsSerializerStrictJson\Exception\TypeMismatchException;
 use JustBlackBird\JmsSerializerStrictJson\StrictJsonDeserializationVisitor;
 use Metadata\MetadataFactory;
 use PHPUnit\Framework\TestCase;
@@ -62,7 +62,7 @@ class DeserializationTest extends TestCase
      */
     public function testInvalidStringDeserialization($invalid_string)
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(TypeMismatchException::class);
         $this->deserialize($invalid_string, 'string');
     }
 
@@ -100,7 +100,7 @@ class DeserializationTest extends TestCase
      */
     public function testInvalidBooleanDeserialization($invalid_boolean)
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(TypeMismatchException::class);
         $this->deserialize($invalid_boolean, 'boolean');
     }
 
@@ -147,7 +147,7 @@ class DeserializationTest extends TestCase
      */
     public function testInvalidInteger($invalid_integer)
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(TypeMismatchException::class);
         $this->deserialize($invalid_integer, 'integer');
     }
 
@@ -203,7 +203,7 @@ class DeserializationTest extends TestCase
      */
     public function testInvalidFloat($invalid_float)
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(TypeMismatchException::class);
         $this->deserialize($invalid_float, 'float');
     }
 
@@ -212,7 +212,7 @@ class DeserializationTest extends TestCase
      */
     public function testInvalidDouble($invalid_double)
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(TypeMismatchException::class);
         $this->deserialize($invalid_double, 'double');
     }
 
