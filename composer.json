@@ -2,7 +2,7 @@
     "name": "justblackbird/jms-serializer-strict-json",
     "type": "library",
     "description": "Provide strict JSON deserialization",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "keywords": [
         "jms",
         "serializer",
